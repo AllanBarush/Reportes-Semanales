@@ -1,0 +1,2021 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RiskMathics — Reporte Semanal de Inteligencia Estratégica Global</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=Source+Sans+3:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-primary: #0a0e17;
+    --bg-secondary: #111827;
+    --bg-card: #151d2e;
+    --bg-card-hover: #1a2438;
+    --border: #1e2a3f;
+    --border-accent: #2a3a55;
+    --text-primary: #e8ecf1;
+    --text-secondary: #8b97a8;
+    --text-muted: #5a6577;
+    --accent-gold: #d4a853;
+    --accent-gold-dim: rgba(212,168,83,0.15);
+    --accent-green: #34d399;
+    --accent-green-dim: rgba(52,211,153,0.12);
+    --accent-red: #f87171;
+    --accent-red-dim: rgba(248,113,113,0.12);
+    --accent-blue: #60a5fa;
+    --accent-blue-dim: rgba(96,165,250,0.12);
+    --accent-amber: #fbbf24;
+    --accent-amber-dim: rgba(251,191,36,0.12);
+    --accent-purple: #a78bfa;
+    --gradient-gold: linear-gradient(135deg, #d4a853, #f0d78c);
+    --gradient-dark: linear-gradient(180deg, #0a0e17 0%, #111827 100%);
+    --shadow-card: 0 4px 24px rgba(0,0,0,0.3);
+    --shadow-glow: 0 0 40px rgba(212,168,83,0.06);
+  }
+
+- { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+font-family: ‘Source Sans 3’, sans-serif;
+background: var(–bg-primary);
+color: var(–text-primary);
+line-height: 1.65;
+-webkit-font-smoothing: antialiased;
+}
+
+/* === HERO HEADER === */
+.hero {
+position: relative;
+padding: 60px 40px 50px;
+background: linear-gradient(170deg, #0a0e17 0%, #0f1829 40%, #111827 100%);
+border-bottom: 1px solid var(–border);
+overflow: hidden;
+}
+
+.hero::before {
+content: ‘’;
+position: absolute;
+top: -50%;
+right: -20%;
+width: 600px;
+height: 600px;
+background: radial-gradient(circle, rgba(212,168,83,0.04) 0%, transparent 70%);
+pointer-events: none;
+}
+
+.hero::after {
+content: ‘’;
+position: absolute;
+bottom: 0;
+left: 0;
+right: 0;
+height: 1px;
+background: linear-gradient(90deg, transparent, var(–accent-gold), transparent);
+opacity: 0.3;
+}
+
+.hero-inner {
+max-width: 1360px;
+margin: 0 auto;
+position: relative;
+z-index: 1;
+}
+
+.hero-brand {
+display: flex;
+align-items: center;
+gap: 16px;
+margin-bottom: 32px;
+}
+
+.hero-logo {
+width: 48px;
+height: 48px;
+background: var(–gradient-gold);
+border-radius: 10px;
+display: flex;
+align-items: center;
+justify-content: center;
+font-family: ‘Playfair Display’, serif;
+font-weight: 900;
+font-size: 24px;
+color: var(–bg-primary);
+box-shadow: 0 4px 20px rgba(212,168,83,0.25);
+}
+
+.hero-brand-text {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 12px;
+letter-spacing: 4px;
+text-transform: uppercase;
+color: var(–accent-gold);
+font-weight: 500;
+}
+
+.hero h1 {
+font-family: ‘Playfair Display’, serif;
+font-size: clamp(32px, 4.5vw, 56px);
+font-weight: 800;
+line-height: 1.12;
+color: var(–text-primary);
+margin-bottom: 16px;
+letter-spacing: -0.5px;
+}
+
+.hero h1 span {
+background: var(–gradient-gold);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+}
+
+.hero-subtitle {
+font-size: 18px;
+color: var(–text-secondary);
+font-weight: 300;
+max-width: 720px;
+margin-bottom: 32px;
+}
+
+.hero-meta {
+display: flex;
+gap: 32px;
+flex-wrap: wrap;
+}
+
+.hero-meta-item {
+display: flex;
+align-items: center;
+gap: 8px;
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 12px;
+color: var(–text-muted);
+letter-spacing: 1px;
+text-transform: uppercase;
+}
+
+.hero-meta-item .dot {
+width: 6px;
+height: 6px;
+border-radius: 50%;
+background: var(–accent-gold);
+}
+
+/* === EXECUTIVE SUMMARY BANNER === */
+.exec-banner {
+max-width: 1360px;
+margin: -24px auto 0;
+padding: 0 40px;
+position: relative;
+z-index: 2;
+}
+
+.exec-banner-inner {
+background: linear-gradient(135deg, rgba(212,168,83,0.08) 0%, rgba(212,168,83,0.02) 100%);
+border: 1px solid rgba(212,168,83,0.2);
+border-radius: 16px;
+padding: 32px 36px;
+backdrop-filter: blur(20px);
+}
+
+.exec-banner-inner p {
+font-size: 16px;
+line-height: 1.75;
+color: var(–text-secondary);
+}
+
+.exec-banner-inner p strong {
+color: var(–accent-gold);
+font-weight: 600;
+}
+
+/* === LAYOUT === */
+.container {
+max-width: 1360px;
+margin: 0 auto;
+padding: 0 40px;
+}
+
+.section {
+padding: 56px 0;
+border-bottom: 1px solid var(–border);
+}
+
+.section:last-child { border-bottom: none; }
+
+.section-header {
+display: flex;
+align-items: center;
+gap: 16px;
+margin-bottom: 36px;
+}
+
+.section-number {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 11px;
+letter-spacing: 2px;
+color: var(–accent-gold);
+background: var(–accent-gold-dim);
+padding: 6px 14px;
+border-radius: 6px;
+font-weight: 600;
+}
+
+.section-title {
+font-family: ‘Playfair Display’, serif;
+font-size: 28px;
+font-weight: 700;
+color: var(–text-primary);
+}
+
+/* === KPI STRIP === */
+.kpi-strip {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+gap: 16px;
+margin-bottom: 48px;
+}
+
+.kpi-card {
+background: var(–bg-card);
+border: 1px solid var(–border);
+border-radius: 12px;
+padding: 24px;
+position: relative;
+overflow: hidden;
+transition: all 0.3s ease;
+}
+
+.kpi-card:hover {
+background: var(–bg-card-hover);
+border-color: var(–border-accent);
+transform: translateY(-2px);
+box-shadow: var(–shadow-card);
+}
+
+.kpi-card::before {
+content: ‘’;
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+height: 3px;
+border-radius: 12px 12px 0 0;
+}
+
+.kpi-card.green::before { background: var(–accent-green); }
+.kpi-card.red::before { background: var(–accent-red); }
+.kpi-card.gold::before { background: var(–accent-gold); }
+.kpi-card.blue::before { background: var(–accent-blue); }
+.kpi-card.amber::before { background: var(–accent-amber); }
+.kpi-card.purple::before { background: var(–accent-purple); }
+
+.kpi-label {
+font-size: 11px;
+font-family: ‘JetBrains Mono’, monospace;
+letter-spacing: 1.5px;
+text-transform: uppercase;
+color: var(–text-muted);
+margin-bottom: 10px;
+}
+
+.kpi-value {
+font-family: ‘Playfair Display’, serif;
+font-size: 32px;
+font-weight: 800;
+color: var(–text-primary);
+margin-bottom: 6px;
+}
+
+.kpi-delta {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 13px;
+font-weight: 600;
+display: flex;
+align-items: center;
+gap: 4px;
+}
+
+.kpi-delta.up { color: var(–accent-green); }
+.kpi-delta.down { color: var(–accent-red); }
+.kpi-delta.neutral { color: var(–accent-amber); }
+
+/* === CHART CONTAINERS === */
+.chart-grid {
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 24px;
+margin-bottom: 32px;
+}
+
+.chart-grid.three-col {
+grid-template-columns: repeat(3, 1fr);
+}
+
+.chart-grid.single {
+grid-template-columns: 1fr;
+}
+
+@media (max-width: 1024px) {
+.chart-grid, .chart-grid.three-col { grid-template-columns: 1fr; }
+}
+
+.chart-card {
+background: var(–bg-card);
+border: 1px solid var(–border);
+border-radius: 14px;
+padding: 28px;
+position: relative;
+transition: all 0.3s ease;
+}
+
+.chart-card:hover {
+border-color: var(–border-accent);
+box-shadow: var(–shadow-glow);
+}
+
+.chart-card-header {
+display: flex;
+justify-content: space-between;
+align-items: flex-start;
+margin-bottom: 20px;
+}
+
+.chart-card-title {
+font-family: ‘Source Sans 3’, sans-serif;
+font-size: 15px;
+font-weight: 600;
+color: var(–text-primary);
+margin-bottom: 4px;
+}
+
+.chart-card-subtitle {
+font-size: 12px;
+color: var(–text-muted);
+font-family: ‘JetBrains Mono’, monospace;
+letter-spacing: 0.5px;
+}
+
+.chart-card-badge {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 11px;
+padding: 4px 10px;
+border-radius: 6px;
+font-weight: 600;
+white-space: nowrap;
+}
+
+.badge-green { background: var(–accent-green-dim); color: var(–accent-green); }
+.badge-red { background: var(–accent-red-dim); color: var(–accent-red); }
+.badge-amber { background: var(–accent-amber-dim); color: var(–accent-amber); }
+.badge-blue { background: var(–accent-blue-dim); color: var(–accent-blue); }
+
+.chart-wrapper {
+position: relative;
+width: 100%;
+}
+
+.chart-wrapper canvas {
+width: 100% !important;
+}
+
+/* === RISK MATRIX === */
+.risk-matrix {
+display: grid;
+grid-template-columns: 1fr;
+gap: 16px;
+}
+
+.risk-row {
+display: grid;
+grid-template-columns: 3fr 80px 100px 4fr;
+gap: 16px;
+align-items: center;
+background: var(–bg-card);
+border: 1px solid var(–border);
+border-radius: 12px;
+padding: 20px 24px;
+transition: all 0.3s ease;
+}
+
+.risk-row:hover {
+background: var(–bg-card-hover);
+border-color: var(–border-accent);
+}
+
+.risk-name {
+font-weight: 600;
+font-size: 15px;
+color: var(–text-primary);
+}
+
+.risk-score {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 18px;
+font-weight: 700;
+text-align: center;
+}
+
+.risk-score.high { color: var(–accent-red); }
+.risk-score.medium { color: var(–accent-amber); }
+.risk-score.low { color: var(–accent-green); }
+
+.risk-semaforo {
+display: flex;
+align-items: center;
+gap: 8px;
+justify-content: center;
+}
+
+.semaforo-dot {
+width: 12px;
+height: 12px;
+border-radius: 50%;
+box-shadow: 0 0 8px currentColor;
+}
+
+.semaforo-dot.high { background: var(–accent-red); color: var(–accent-red); }
+.semaforo-dot.medium-high { background: #fb923c; color: #fb923c; }
+.semaforo-dot.medium { background: var(–accent-amber); color: var(–accent-amber); }
+.semaforo-dot.low { background: var(–accent-green); color: var(–accent-green); }
+
+.semaforo-label {
+font-size: 11px;
+font-family: ‘JetBrains Mono’, monospace;
+letter-spacing: 1px;
+text-transform: uppercase;
+color: var(–text-muted);
+}
+
+.risk-detail {
+font-size: 13px;
+color: var(–text-secondary);
+line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+.risk-row {
+grid-template-columns: 1fr;
+gap: 12px;
+}
+}
+
+/* === GAUGE METER === */
+.gauge-container {
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 20px;
+}
+
+.gauge-svg {
+width: 220px;
+height: 130px;
+}
+
+.gauge-label {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 11px;
+letter-spacing: 1.5px;
+text-transform: uppercase;
+color: var(–text-muted);
+margin-top: 12px;
+}
+
+.gauge-value-text {
+font-family: ‘Playfair Display’, serif;
+font-size: 36px;
+font-weight: 800;
+margin-top: 4px;
+}
+
+/* === HEATMAP TABLE === */
+.heatmap-table {
+width: 100%;
+border-collapse: separate;
+border-spacing: 0;
+font-size: 14px;
+}
+
+.heatmap-table th {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 11px;
+letter-spacing: 1px;
+text-transform: uppercase;
+color: var(–text-muted);
+padding: 12px 16px;
+text-align: left;
+border-bottom: 1px solid var(–border);
+font-weight: 500;
+}
+
+.heatmap-table td {
+padding: 14px 16px;
+border-bottom: 1px solid var(–border);
+color: var(–text-secondary);
+}
+
+.heatmap-table tr:last-child td {
+border-bottom: none;
+}
+
+.heatmap-table tr:hover td {
+background: rgba(255,255,255,0.02);
+}
+
+.heat-cell {
+font-family: ‘JetBrains Mono’, monospace;
+font-weight: 600;
+font-size: 13px;
+padding: 4px 10px;
+border-radius: 6px;
+display: inline-block;
+}
+
+.heat-positive { background: var(–accent-green-dim); color: var(–accent-green); }
+.heat-negative { background: var(–accent-red-dim); color: var(–accent-red); }
+.heat-neutral { background: var(–accent-amber-dim); color: var(–accent-amber); }
+
+/* === TIMELINE === */
+.timeline {
+position: relative;
+padding-left: 32px;
+}
+
+.timeline::before {
+content: ‘’;
+position: absolute;
+left: 8px;
+top: 0;
+bottom: 0;
+width: 2px;
+background: linear-gradient(180deg, var(–accent-gold), var(–border));
+}
+
+.timeline-item {
+position: relative;
+margin-bottom: 28px;
+padding-left: 20px;
+}
+
+.timeline-item::before {
+content: ‘’;
+position: absolute;
+left: -28px;
+top: 6px;
+width: 12px;
+height: 12px;
+border-radius: 50%;
+background: var(–bg-primary);
+border: 2px solid var(–accent-gold);
+}
+
+.timeline-date {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 12px;
+color: var(–accent-gold);
+letter-spacing: 1px;
+margin-bottom: 4px;
+}
+
+.timeline-event {
+font-size: 15px;
+font-weight: 600;
+color: var(–text-primary);
+margin-bottom: 4px;
+}
+
+.timeline-desc {
+font-size: 13px;
+color: var(–text-secondary);
+line-height: 1.55;
+}
+
+/* === ACTION CARDS === */
+.action-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 16px;
+}
+
+.action-card {
+background: var(–bg-card);
+border: 1px solid var(–border);
+border-radius: 12px;
+padding: 24px;
+border-left: 3px solid var(–accent-gold);
+transition: all 0.3s ease;
+}
+
+.action-card:hover {
+background: var(–bg-card-hover);
+transform: translateY(-2px);
+box-shadow: var(–shadow-card);
+}
+
+.action-card.add { border-left-color: var(–accent-green); }
+.action-card.remove { border-left-color: var(–accent-red); }
+
+.action-card-tag {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 10px;
+letter-spacing: 2px;
+text-transform: uppercase;
+margin-bottom: 10px;
+}
+
+.action-card.add .action-card-tag { color: var(–accent-green); }
+.action-card.remove .action-card-tag { color: var(–accent-red); }
+
+.action-card-title {
+font-weight: 700;
+font-size: 15px;
+color: var(–text-primary);
+margin-bottom: 8px;
+}
+
+.action-card-desc {
+font-size: 13px;
+color: var(–text-secondary);
+line-height: 1.55;
+}
+
+/* === POSITIONING CALLOUT === */
+.callout-box {
+background: linear-gradient(135deg, rgba(212,168,83,0.06), rgba(212,168,83,0.02));
+border: 1px solid rgba(212,168,83,0.2);
+border-radius: 14px;
+padding: 32px;
+margin-top: 32px;
+}
+
+.callout-title {
+font-family: ‘Playfair Display’, serif;
+font-size: 20px;
+font-weight: 700;
+color: var(–accent-gold);
+margin-bottom: 20px;
+}
+
+.callout-list {
+list-style: none;
+display: grid;
+gap: 14px;
+}
+
+.callout-list li {
+display: flex;
+gap: 12px;
+align-items: flex-start;
+font-size: 14px;
+color: var(–text-secondary);
+line-height: 1.55;
+}
+
+.callout-list li::before {
+content: ‘→’;
+color: var(–accent-gold);
+font-weight: 700;
+flex-shrink: 0;
+margin-top: 1px;
+}
+
+/* === FOOTER === */
+.report-footer {
+padding: 40px;
+text-align: center;
+border-top: 1px solid var(–border);
+}
+
+.footer-line {
+height: 1px;
+background: linear-gradient(90deg, transparent, var(–accent-gold), transparent);
+opacity: 0.3;
+margin-bottom: 24px;
+}
+
+.footer-text {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 11px;
+letter-spacing: 2px;
+text-transform: uppercase;
+color: var(–text-muted);
+}
+
+/* === ANNOTATIONS === */
+.chart-annotation {
+background: var(–bg-secondary);
+border: 1px solid var(–border);
+border-radius: 8px;
+padding: 14px 18px;
+margin-top: 16px;
+font-size: 13px;
+color: var(–text-secondary);
+line-height: 1.6;
+}
+
+.chart-annotation strong {
+color: var(–accent-gold);
+font-weight: 600;
+}
+
+.chart-annotation .insight {
+color: var(–text-primary);
+font-weight: 500;
+}
+
+/* === FULL WIDTH CHART === */
+.chart-full {
+grid-column: 1 / -1;
+}
+
+/* === MINI SPARKLINE AREA === */
+.sparkline-grid {
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+gap: 16px;
+margin-bottom: 32px;
+}
+
+@media (max-width: 900px) {
+.sparkline-grid { grid-template-columns: repeat(2, 1fr); }
+.hero { padding: 40px 20px 36px; }
+.container { padding: 0 20px; }
+.exec-banner { padding: 0 20px; }
+}
+
+/* === ANIMATIONS === */
+@keyframes fadeInUp {
+from { opacity: 0; transform: translateY(20px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-in {
+animation: fadeInUp 0.6s ease-out forwards;
+opacity: 0;
+}
+
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }
+.delay-5 { animation-delay: 0.5s; }
+.delay-6 { animation-delay: 0.6s; }
+
+/* === EXPLANATION PANEL === */
+.explanation-panel {
+background: rgba(96,165,250,0.04);
+border: 1px solid rgba(96,165,250,0.15);
+border-radius: 10px;
+padding: 20px 24px;
+margin-top: 14px;
+font-size: 13px;
+line-height: 1.65;
+color: var(–text-secondary);
+}
+
+.explanation-panel .exp-title {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 10px;
+letter-spacing: 2px;
+text-transform: uppercase;
+color: var(–accent-blue);
+margin-bottom: 8px;
+font-weight: 600;
+}
+
+.explanation-panel em { color: var(–accent-blue); font-style: normal; font-weight: 600; }
+
+/* Geopolitical radar */
+.geo-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+gap: 16px;
+}
+
+.geo-card {
+background: var(–bg-card);
+border: 1px solid var(–border);
+border-radius: 12px;
+padding: 24px;
+transition: all 0.3s;
+}
+
+.geo-card:hover {
+background: var(–bg-card-hover);
+border-color: var(–border-accent);
+}
+
+.geo-card-region {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 10px;
+letter-spacing: 2px;
+text-transform: uppercase;
+color: var(–accent-gold);
+margin-bottom: 8px;
+}
+
+.geo-card-title {
+font-size: 16px;
+font-weight: 700;
+color: var(–text-primary);
+margin-bottom: 10px;
+}
+
+.geo-card-desc {
+font-size: 13px;
+color: var(–text-secondary);
+line-height: 1.55;
+}
+</style>
+
+</head>
+<body>
+
+<!-- ========== HERO ========== -->
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-brand animate-in">
+      <div class="hero-logo">R</div>
+      <div class="hero-brand-text">RiskMathics · Inteligencia Estratégica Global</div>
+    </div>
+    <h1 class="animate-in delay-1">Reporte Semanal<br><span>9 — 13 Febrero 2026</span></h1>
+    <p class="hero-subtitle animate-in delay-2">Inflación favorable en EE.UU. (CPI 2.4%), México en máximos históricos, disrupción de IA domina sentimiento tech, y Múnich confirma fragmentación geopolítica.</p>
+    <div class="hero-meta animate-in delay-3">
+      <div class="hero-meta-item"><span class="dot"></span> IRI: 16.5 / 25</div>
+      <div class="hero-meta-item"><span class="dot"></span> S&P 500: 6,836</div>
+      <div class="hero-meta-item"><span class="dot"></span> USD/MXN: 17.13</div>
+      <div class="hero-meta-item"><span class="dot"></span> VIX: 20.6</div>
+      <div class="hero-meta-item"><span class="dot"></span> BTC: $66,200</div>
+    </div>
+  </div>
+</header>
+
+<!-- ========== EXECUTIVE SUMMARY ========== -->
+
+<div class="exec-banner animate-in delay-4">
+  <div class="exec-banner-inner">
+    <p>La semana cerró con un dato de inflación favorable en EE.UU. (<strong>CPI 2.4%</strong>), pero la volatilidad en tecnología por disrupciones de IA dominó el sentimiento de mercado. México alcanzó <strong>máximos históricos</strong> en su bolsa (IPC 72,111) y el peso se apreció a <strong>17.12</strong>, mientras la Conferencia de Seguridad de Múnich y las negociaciones de paz Ucrania-Rusia en Ginebra definen el tono geopolítico global. El riesgo actual no proviene de desequilibrios domésticos, sino de la <strong>exposición externa al ciclo político estadounidense</strong>.</p>
+  </div>
+</div>
+
+<main class="container">
+
+<!-- ========== SECTION I: KPIs ========== -->
+
+<section class="section animate-in delay-5">
+  <div class="section-header">
+    <span class="section-number">01</span>
+    <h2 class="section-title">Tablero de Control — Macro Snapshot</h2>
+  </div>
+
+  <div class="kpi-strip">
+    <div class="kpi-card green">
+      <div class="kpi-label">IPC BMV México</div>
+      <div class="kpi-value">72,111</div>
+      <div class="kpi-delta up">▲ +0.9% semanal · Máximo histórico</div>
+    </div>
+    <div class="kpi-card green">
+      <div class="kpi-label">USD/MXN</div>
+      <div class="kpi-value">17.13</div>
+      <div class="kpi-delta up">▲ +15.65% apreciación anual</div>
+    </div>
+    <div class="kpi-card blue">
+      <div class="kpi-label">CPI EE.UU. Enero</div>
+      <div class="kpi-value">2.4%</div>
+      <div class="kpi-delta up">▼ desde 2.7% dic · Favorable</div>
+    </div>
+    <div class="kpi-card gold">
+      <div class="kpi-label">Reservas México</div>
+      <div class="kpi-value">$251.8B</div>
+      <div class="kpi-delta up">Récord histórico</div>
+    </div>
+    <div class="kpi-card amber">
+      <div class="kpi-label">VIX Volatilidad</div>
+      <div class="kpi-value">20.6</div>
+      <div class="kpi-delta down">▲ +15.7% semanal · Cautela</div>
+    </div>
+    <div class="kpi-card red">
+      <div class="kpi-label">Bitcoin</div>
+      <div class="kpi-value">$66,200</div>
+      <div class="kpi-delta down">▼ -24% YTD · Fear & Greed: 9</div>
+    </div>
+  </div>
+
+  <div class="chart-annotation">
+    <strong>📊 Lectura del Tablero:</strong> México presenta un cuadro excepcionalmente robusto — bolsa en máximos, peso fuerte, reservas récord, inflación controlada (3.79%). La divergencia con el VIX al alza (+15.7%) y el colapso de Bitcoin (-24% YTD con Fear & Greed en "Extreme Fear") señala que <span class="insight">el riesgo no es doméstico sino exógeno: ciclo político de EE.UU., USMCA, y narrativa de IA</span>. El diferencial de tasas (7.00% MX vs 3.75% US) sigue sosteniendo al peso como carry trade atractivo.
+  </div>
+</section>
+
+<!-- ========== SECTION II: RISK INDEX ========== -->
+
+<section class="section">
+  <div class="section-header">
+    <span class="section-number">02</span>
+    <h2 class="section-title">Índice de Riesgo Integral (IRI)</h2>
+  </div>
+
+  <div class="chart-grid">
+    <div class="chart-card">
+      <div class="chart-card-header">
+        <div>
+          <div class="chart-card-title">Evolución del IRI — Últimas Semanas</div>
+          <div class="chart-card-subtitle">Escala 0-25 · Riesgo acumulativo, no disruptivo</div>
+        </div>
+        <span class="chart-card-badge badge-amber">16.5 / 25</span>
+      </div>
+      <div class="chart-wrapper"><canvas id="iriChart"></canvas></div>
+      <div class="explanation-panel">
+        <div class="exp-title">¿Qué muestra esta gráfica?</div>
+        Evolución del Índice de Riesgo Integral de RiskMathics en las últimas 8 semanas. El IRI subió ligeramente de <em>16.3 a 16.5</em>, confirmando una tendencia de riesgo acumulativo pero sin disrupción. La zona roja (>20) representaría crisis; estamos en <em>zona naranja de cautela estructural</em>. El Entorno General (IG) también subió marginalmente de 14.2 a 14.4.
+      </div>
+    </div>
+
+```
+<div class="chart-card">
+  <div class="chart-card-header">
+    <div>
+      <div class="chart-card-title">Gauge de Riesgo Integral Actual</div>
+      <div class="chart-card-subtitle">Medidor visual del nivel IRI actual</div>
+    </div>
+  </div>
+  <div class="gauge-container">
+    <svg class="gauge-svg" viewBox="0 0 220 130">
+      <defs>
+        <linearGradient id="gaugeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:#34d399" />
+          <stop offset="40%" style="stop-color:#fbbf24" />
+          <stop offset="70%" style="stop-color:#fb923c" />
+          <stop offset="100%" style="stop-color:#f87171" />
+        </linearGradient>
+      </defs>
+      <!-- Background arc -->
+      <path d="M 20 110 A 90 90 0 0 1 200 110" fill="none" stroke="#1e2a3f" stroke-width="18" stroke-linecap="round"/>
+      <!-- Colored arc -->
+      <path d="M 20 110 A 90 90 0 0 1 200 110" fill="none" stroke="url(#gaugeGrad)" stroke-width="18" stroke-linecap="round" opacity="0.3"/>
+      <!-- Value arc (66% of 180deg = ~119deg) -->
+      <path d="M 20 110 A 90 90 0 0 1 200 110" fill="none" stroke="url(#gaugeGrad)" stroke-width="18" stroke-linecap="round" stroke-dasharray="283" stroke-dashoffset="96" />
+      <!-- Needle -->
+      <line x1="110" y1="110" x2="62" y2="42" stroke="#d4a853" stroke-width="2.5" stroke-linecap="round"/>
+      <circle cx="110" cy="110" r="6" fill="#d4a853"/>
+      <circle cx="110" cy="110" r="3" fill="#0a0e17"/>
+      <!-- Labels -->
+      <text x="15" y="128" fill="#5a6577" font-family="JetBrains Mono" font-size="9">0</text>
+      <text x="103" y="18" fill="#5a6577" font-family="JetBrains Mono" font-size="9">12.5</text>
+      <text x="195" y="128" fill="#5a6577" font-family="JetBrains Mono" font-size="9">25</text>
+    </svg>
+    <div class="gauge-label">Índice de Riesgo Integral</div>
+    <div class="gauge-value-text" style="color: var(--accent-amber);">16.5</div>
+  </div>
+  <div class="explanation-panel">
+    <div class="exp-title">¿Qué muestra este medidor?</div>
+    Un gauge semicircular que mapea el IRI en una escala visual de 0 a 25. El <em>gradiente va de verde (bajo riesgo) a rojo (alto riesgo)</em>. La aguja apunta a 16.5, zona Medio-Alta. Indica que hay suficiente riesgo acumulado para mantener coberturas activas, pero no para posicionamiento defensivo completo.
+  </div>
+</div>
+```
+
+  </div>
+</section>
+
+<!-- ========== SECTION III: TOP 3 RISKS ========== -->
+
+<section class="section">
+  <div class="section-header">
+    <span class="section-number">03</span>
+    <h2 class="section-title">Top 3 Riesgos de la Semana</h2>
+  </div>
+
+  <div class="chart-grid">
+    <div class="chart-card">
+      <div class="chart-card-header">
+        <div>
+          <div class="chart-card-title">Radar de Riesgos Principales</div>
+          <div class="chart-card-subtitle">Comparativo multidimensional de amenazas</div>
+        </div>
+      </div>
+      <div class="chart-wrapper"><canvas id="riskRadar"></canvas></div>
+      <div class="explanation-panel">
+        <div class="exp-title">¿Qué muestra esta gráfica?</div>
+        Un radar chart que compara las 5 dimensiones de riesgo principales. <em>Fricción bilateral EE.UU.-México domina con 19/25</em>, seguida de reconfiguración hemisférica (17/25) y erosión multilateral post-Múnich (16/25). La línea dorada (semana actual) vs la gris (semana previa) muestra que todos los riesgos subieron marginalmente — el entorno se deteriora gradualmente.
+      </div>
+    </div>
+
+```
+<div class="chart-card">
+  <div class="chart-card-header">
+    <div>
+      <div class="chart-card-title">Distribución de Severidad de Riesgos</div>
+      <div class="chart-card-subtitle">Barras horizontales · Escala 0-25</div>
+    </div>
+  </div>
+  <div class="chart-wrapper"><canvas id="riskBars"></canvas></div>
+  <div class="explanation-panel">
+    <div class="exp-title">¿Qué muestra esta gráfica?</div>
+    Barras horizontales que ordenan todos los riesgos monitoreados de mayor a menor severidad. <em>Los colores codifican semáforos</em>: rojo (>18), naranja (15-18), amarillo (12-15), verde (<12). Permite ver de un vistazo que la estabilidad financiera local de México es el único indicador en zona verde (12/25).
+  </div>
+</div>
+```
+
+  </div>
+
+  <div class="risk-matrix" style="margin-top: 24px;">
+    <div class="risk-row">
+      <div class="risk-name">Fricción Bilateral EE.UU.–México</div>
+      <div class="risk-score high">19/25</div>
+      <div class="risk-semaforo"><span class="semaforo-dot medium-high"></span><span class="semaforo-label">Medio-Alto</span></div>
+      <div class="risk-detail">Cooperación operativa continúa con límites de soberanía. Cumbre Trump-Latam en marzo como catalizador. USMCA review en julio.</div>
+    </div>
+    <div class="risk-row">
+      <div class="risk-name">Reconfiguración Hemisférica post-Venezuela</div>
+      <div class="risk-score medium">17/25</div>
+      <div class="risk-semaforo"><span class="semaforo-dot medium"></span><span class="semaforo-label">Medio</span></div>
+      <div class="risk-detail">Agenda de seguridad hemisférica gana centralidad. China amplía influencia vía Chancay (Perú). Sin choque económico inmediato.</div>
+    </div>
+    <div class="risk-row">
+      <div class="risk-name">Entorno Global sin Amortiguadores (Múnich)</div>
+      <div class="risk-score medium">16/25</div>
+      <div class="risk-semaforo"><span class="semaforo-dot medium"></span><span class="semaforo-label">Medio</span></div>
+      <div class="risk-detail">Erosión del orden multilateral confirmada. Conflictos activos y crecimiento débil reducen margen de error global.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SECTION IV: EQUITY MARKETS ========== -->
+
+<section class="section">
+  <div class="section-header">
+    <span class="section-number">04</span>
+    <h2 class="section-title">Mercados Financieros — Renta Variable</h2>
+  </div>
+
+  <div class="chart-grid">
+    <div class="chart-card chart-full">
+      <div class="chart-card-header">
+        <div>
+          <div class="chart-card-title">Performance Semanal de Índices Globales</div>
+          <div class="chart-card-subtitle">Variación % semanal · Cierre 13 feb 2026</div>
+        </div>
+        <span class="chart-card-badge badge-amber">Rotación sectorial activa</span>
+      </div>
+      <div class="chart-wrapper"><canvas id="equityBars"></canvas></div>
+      <div class="explanation-panel">
+        <div class="exp-title">¿Qué muestra esta gráfica?</div>
+        Barras de rendimiento semanal de los principales índices globales. La narrativa es clara: <em>rotación masiva de tech (Nasdaq -2.1%) hacia value/internacionales (MSCI EAFE +1.9%, Nikkei +5%)</em>. México (+0.9%) se beneficia del broadening. El Dow cruzó 50K por primera vez. El contraste entre Nasdaq (-3% YTD) y MSCI EAFE (+7.8% YTD) marca la mayor divergencia doméstico-internacional desde 2022.
+      </div>
+    </div>
+  </div>
+
+  <div class="chart-grid" style="margin-top: 24px;">
+    <div class="chart-card">
+      <div class="chart-card-header">
+        <div>
+          <div class="chart-card-title">Rendimiento YTD Acumulado</div>
+          <div class="chart-card-subtitle">Simulación de trayectoria 2026</div>
+        </div>
+      </div>
+      <div class="chart-wrapper"><canvas id="ytdLines"></canvas></div>
+      <div class="explanation-panel">
+        <div class="exp-title">¿Qué muestra esta gráfica?</div>
+        Líneas de rendimiento acumulado YTD de los principales índices. <em>Nikkei lidera con +12% impulsado por "Sanaenomics"</em> (Takaichi + expansión fiscal). MSCI EAFE +7.8% confirma la rotación internacional. S&P 500 flat (0%). Nasdaq -3% en su peor inicio de año desde 2022. IPC México sube firme acompañando el broadening global.
+      </div>
+    </div>
+
+```
+<div class="chart-card">
+  <div class="chart-card-header">
+    <div>
+      <div class="chart-card-title">VIX — Índice de Volatilidad</div>
+      <div class="chart-card-subtitle">Evolución últimas 8 semanas</div>
+    </div>
+    <span class="chart-card-badge badge-red">+36.7% YTD</span>
+  </div>
+  <div class="chart-wrapper"><canvas id="vixChart"></canvas></div>
+  <div class="explanation-panel">
+    <div class="exp-title">¿Qué muestra esta gráfica?</div>
+    Evolución del VIX con bandas de referencia. El salto semanal de +15.7% a 20.6 refleja <em>ansiedad por la narrativa de IA y la rotación tech</em>. La zona gris marca el rango "complacencia" (<16). Estamos por encima, en zona de "cautela elevada". No es pánico (>30), pero la tendencia alcista del VIX en 2026 (+36.7% YTD) sugiere que el mercado pricing mayor incertidumbre estructural.
+  </div>
+</div>
+```
+
+  </div>
+</section>
+
+<!-- ========== SECTION V: RATES & FX ========== -->
+
+<section class="section">
+  <div class="section-header">
+    <span class="section-number">05</span>
+    <h2 class="section-title">Renta Fija, Política Monetaria y Divisas</h2>
+  </div>
+
+  <div class="chart-grid three-col">
+    <div class="chart-card">
+      <div class="chart-card-header">
+        <div>
+          <div class="chart-card-title">Trayectoria de Tasas Fed vs Banxico</div>
+          <div class="chart-card-subtitle">Evolución de política monetaria</div>
+        </div>
+      </div>
+      <div class="chart-wrapper"><canvas id="ratesChart"></canvas></div>
+      <div class="explanation-panel">
+        <div class="exp-title">¿Qué muestra esta gráfica?</div>
+        Comparativo de trayectorias de tasas de interés. <em>Banxico bajó de 11% a 7% (8 recortes consecutivos)</em> y pausó. La Fed está en 3.50-3.75%. El diferencial de 325bps sigue siendo el motor del carry trade del peso. Proyección: Banxico hacia 6.50% terminal; Fed con 2 recortes más en 2026.
+      </div>
+    </div>
+
+```
+<div class="chart-card">
+  <div class="chart-card-header">
+    <div>
+      <div class="chart-card-title">Inflación EE.UU. — Tendencia</div>
+      <div class="chart-card-subtitle">CPI anualizado mensual</div>
+    </div>
+    <span class="chart-card-badge badge-green">2.4% ↓</span>
+  </div>
+  <div class="chart-wrapper"><canvas id="cpiChart"></canvas></div>
+  <div class="explanation-panel">
+    <div class="exp-title">¿Qué muestra esta gráfica?</div>
+    Tendencia descendente del CPI de EE.UU. desde el pico de 2022. El dato de enero 2026 (<em>2.4% vs 2.7% en diciembre</em>) fue mejor que esperado. Core CPI en 2.5%. Esta desinflación da espacio a la Fed para recortar, pero <em>la incertidumbre arancelaria limita la velocidad</em>. El mercado descuenta ~51% probabilidad de recorte en junio.
+  </div>
+</div>
+
+<div class="chart-card">
+  <div class="chart-card-header">
+    <div>
+      <div class="chart-card-title">USD/MXN — Apreciación del Peso</div>
+      <div class="chart-card-subtitle">Evolución 12 meses</div>
+    </div>
+    <span class="chart-card-badge badge-green">+15.65% anual</span>
+  </div>
+  <div class="chart-wrapper"><canvas id="usdmxnChart"></canvas></div>
+  <div class="explanation-panel">
+    <div class="exp-title">¿Qué muestra esta gráfica?</div>
+    Apreciación sostenida del peso mexicano en los últimos 12 meses. De ~20.30 a 17.13, una ganancia del 15.65%. <em>Drivers: diferencial de tasas (carry trade), flujos de nearshoring, y estabilidad macro mexicana</em>. Rango proyectado 2026: 17.16-18.00. Riesgo clave: USMCA review en julio podría generar volatilidad.
+  </div>
+</div>
+```
+
+  </div>
+</section>
+
+<!-- ========== SECTION VI: COMMODITIES & CRYPTO ========== -->
+
+<section class="section">
+  <div class="section-header">
+    <span class="section-number">06</span>
+    <h2 class="section-title">Commodities y Criptomonedas</h2>
+  </div>
+
+  <div class="chart-grid">
+    <div class="chart-card">
+      <div class="chart-card-header">
+        <div>
+          <div class="chart-card-title">Commodities — Snapshot de Precios</div>
+          <div class="chart-card-subtitle">Oro, plata, petróleo · Cierre semanal</div>
+        </div>
+      </div>
+      <div class="chart-wrapper"><canvas id="commodChart"></canvas></div>
+      <div class="explanation-panel">
+        <div class="exp-title">¿Qué muestra esta gráfica?</div>
+        Rendimiento normalizado de commodities clave. <em>Oro en ~$5,000/oz es el gran ganador como hedge geopolítico</em> (Goldman target: $4,900 dic 2026). Plata rebotó +8.6%. Petróleo bajista: exceso de oferta de 2-4 Mbd empuja WTI a $62-65. Goldman proyecta $52 promedio 2026 — negativo para petro-estados, positivo para México como importador neto.
+      </div>
+    </div>
+
+```
+<div class="chart-card">
+  <div class="chart-card-header">
+    <div>
+      <div class="chart-card-title">Bitcoin Fear & Greed Index</div>
+      <div class="chart-card-subtitle">Sentimiento extremo de mercado</div>
+    </div>
+    <span class="chart-card-badge badge-red">Extreme Fear: 9</span>
+  </div>
+  <div class="chart-wrapper"><canvas id="fearGreed"></canvas></div>
+  <div class="explanation-panel">
+    <div class="exp-title">¿Qué muestra esta gráfica?</div>
+    Gauge del Fear & Greed Index de crypto en 9 de 100 — <em>"Extreme Fear"</em>. Bitcoin cayó -24% en 2026. StanChart bajó su target de $150K a $100K. Históricamente, lecturas sub-10 han sido zonas de acumulación contrarian a 12 meses, pero <em>el reporte recomienda NO agregar posiciones hasta que el sentimiento salga de "Extreme Fear"</em>.
+  </div>
+</div>
+```
+
+  </div>
+</section>
+
+<!-- ========== SECTION VII: GEOPOLITICS ========== -->
+
+<section class="section">
+  <div class="section-header">
+    <span class="section-number">07</span>
+    <h2 class="section-title">Geopolítica — Desarrollos Clave</h2>
+  </div>
+
+  <div class="geo-grid">
+    <div class="geo-card">
+      <div class="geo-card-region">Europa · Múnich</div>
+      <div class="geo-card-title">Conferencia de Seguridad — Fragmentación Confirmada</div>
+      <div class="geo-card-desc">450+ tomadores de decisión. "Punto de inflexión fundamental". Alianzas cuestionadas, orden basado en reglas erosionándose. Sin acuerdos formales — solo convergencia discursiva sobre un mundo más volátil.</div>
+    </div>
+    <div class="geo-card">
+      <div class="geo-card-region">Ucrania-Rusia · Ginebra</div>
+      <div class="geo-card-title">Negociaciones Trilaterales — Sin Avance Territorial</div>
+      <div class="geo-card-desc">3ª ronda en suelo europeo. Rusia exige retiro del Donbás; Ucrania exige garantías de 20+ años. "Deadline de junio" según Zelenskyy. 400+ drones y ~40 misiles la semana pasada. Guerra entra en su 5° año el 24 feb.</div>
+    </div>
+    <div class="geo-card">
+      <div class="geo-card-region">Hemisferio Occidental</div>
+      <div class="geo-card-title">"Doctrina Donroe" y Reconfiguración LATAM</div>
+      <div class="geo-card-desc">Post-Venezuela: gobierno interino opera con pragmatismo. EE.UU. intermedia venta de petróleo ($500M). Cumbre Trump-Latam en marzo. Orden ejecutiva: aranceles 25% a países que vendan a Cuba/Irán.</div>
+    </div>
+    <div class="geo-card">
+      <div class="geo-card-region">Asia-Pacífico · Japón</div>
+      <div class="geo-card-title">"Sanaenomics" — Rally Nikkei +5%</div>
+      <div class="geo-card-desc">Takaichi ganó con supermayoría. Nikkei cruzó 57,000. Expansión fiscal + acomodación monetaria. Visita de estado a Washington 19 marzo. El rally japonés es la historia de asset allocation del trimestre.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SECTION VIII: MEXICO DEEP DIVE ========== -->
+
+<section class="section">
+  <div class="section-header">
+    <span class="section-number">08</span>
+    <h2 class="section-title">México — Análisis Detallado</h2>
+  </div>
+
+  <div class="chart-grid">
+    <div class="chart-card">
+      <div class="chart-card-header">
+        <div>
+          <div class="chart-card-title">Proyecciones PIB México 2026</div>
+          <div class="chart-card-subtitle">Comparativo de casas de análisis</div>
+        </div>
+      </div>
+      <div class="chart-wrapper"><canvas id="gdpChart"></canvas></div>
+      <div class="explanation-panel">
+        <div class="exp-title">¿Qué muestra esta gráfica?</div>
+        Barras comparativas de proyecciones de PIB México 2026 por diferentes instituciones. <em>Rango: 0.4% (pesimista Banxico) a 1.5% (Vanguard)</em>. Goldman en 1.3%, Banxico central en 1.1%. El crecimiento débil (vs 0.4% en 2025) limita la narrativa de inversión, pero la Copa del Mundo FIFA (US$3B impacto directo) y nearshoring son catalizadores de upside.
+      </div>
+    </div>
+
+```
+<div class="chart-card">
+  <div class="chart-card-header">
+    <div>
+      <div class="chart-card-title">Macro Dashboard México</div>
+      <div class="chart-card-subtitle">Indicadores clave comparados vs targets</div>
+    </div>
+  </div>
+  <div class="chart-wrapper"><canvas id="mexicoRadar"></canvas></div>
+  <div class="explanation-panel">
+    <div class="exp-title">¿Qué muestra esta gráfica?</div>
+    Radar multidimensional de salud macro de México. <em>Fortalezas: reservas (10/10), tipo de cambio (9/10), inflación controlada (8/10)</em>. Debilidades: crecimiento (4/10) y exposición a riesgo externo. El perfil es de "economía defensiva con upside limitado" — ideal para carry trade, complicado para equity growth.
+  </div>
+</div>
+```
+
+  </div>
+
+  <div class="heatmap-table" style="margin-top: 24px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden;">
+    <table class="heatmap-table">
+      <thead>
+        <tr>
+          <th>Indicador</th>
+          <th>Valor</th>
+          <th>Señal</th>
+          <th>Implicación</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="font-weight:600; color: var(--text-primary);">PIB 2026 (proyección)</td>
+          <td><span class="heat-cell heat-neutral">1.1%</span></td>
+          <td>Bajo crecimiento</td>
+          <td>Nearshoring y FIFA como catalizadores de upside</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600; color: var(--text-primary);">Inflación</td>
+          <td><span class="heat-cell heat-positive">3.79%</span></td>
+          <td>Controlada</td>
+          <td>Permite espacio para recortes de Banxico</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600; color: var(--text-primary);">Tasa Banxico</td>
+          <td><span class="heat-cell heat-neutral">7.00%</span></td>
+          <td>Pausa unánime</td>
+          <td>Terminal ~6.50%. Carry trade sigue atractivo</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600; color: var(--text-primary);">Reservas Internacionales</td>
+          <td><span class="heat-cell heat-positive">$251.8B</span></td>
+          <td>Récord</td>
+          <td>Colchón de defensa contra shocks externos</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600; color: var(--text-primary);">Relación Bilateral EE.UU.</td>
+          <td><span class="heat-cell heat-negative">18/25</span></td>
+          <td>Medio-Alto</td>
+          <td>USMCA review julio = evento de riesgo principal</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ========== SECTION IX: DERIVATIVES ========== -->
+
+<section class="section">
+  <div class="section-header">
+    <span class="section-number">09</span>
+    <h2 class="section-title">Sección RiskMathics — Oportunidades Estratégicas</h2>
+  </div>
+
+  <div class="chart-grid">
+    <div class="chart-card chart-full">
+      <div class="chart-card-header">
+        <div>
+          <div class="chart-card-title">Mercado de Derivados OTC — Crecimiento Exponencial</div>
+          <div class="chart-card-subtitle">Nocional global · Fuente: ISDA</div>
+        </div>
+        <span class="chart-card-badge badge-green">+15.9% H1 2025</span>
+      </div>
+      <div class="chart-wrapper"><canvas id="derivativesChart"></canvas></div>
+      <div class="explanation-panel">
+        <div class="exp-title">¿Qué muestra esta gráfica?</div>
+        Crecimiento del mercado global de derivados OTC (nocional en USD trillones). <em>+15.9% en H1 2025 vs H1 2024, con valor bruto de mercado +29.5%</em>. Margen inicial en CCPs saltó de $364B a $430B. Esto es el core business case de RiskMathics: las instituciones NECESITAN capacitación en Basel Endgame, UST clearing, cross-margining. Target: $10M ventas 2026 vía programas institucionales.
+      </div>
+    </div>
+  </div>
+
+  <h3 style="font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; margin: 36px 0 20px; color: var(--text-primary);">Acciones Inmediatas — Agregar vs Deprioritizar</h3>
+
+  <div class="action-grid">
+    <div class="action-card add">
+      <div class="action-card-tag">→ Agregar</div>
+      <div class="action-card-title">Certificación Basel Endgame 2026</div>
+      <div class="action-card-desc">Nueva versión Q1 — todas las instituciones necesitan recertificar. Oportunidad de revenue inmediata.</div>
+    </div>
+    <div class="action-card add">
+      <div class="action-card-tag">→ Agregar</div>
+      <div class="action-card-title">Workshop: Tokenización de Colateral</div>
+      <div class="action-card-desc">Tendencia disruptiva en derivados, poca oferta educativa en español. First-mover advantage claro.</div>
+    </div>
+    <div class="action-card add">
+      <div class="action-card-tag">→ Agregar</div>
+      <div class="action-card-title">Programa Ejecutivo "Navegando USMCA"</div>
+      <div class="action-card-desc">Para tesoreros, risk managers y compliance officers. Evento de julio 2026 como deadline natural.</div>
+    </div>
+    <div class="action-card add">
+      <div class="action-card-tag">→ Agregar</div>
+      <div class="action-card-title">"Derivados en 60 Segundos"</div>
+      <div class="action-card-desc">Píldoras de mercado para LinkedIn/newsletter. Funnel de adquisición orgánica.</div>
+    </div>
+    <div class="action-card remove">
+      <div class="action-card-tag">✕ Deprioritizar</div>
+      <div class="action-card-title">Contenido Genérico de Finanzas Personales</div>
+      <div class="action-card-desc">No es el nicho. Diluye el posicionamiento premium y cuantitativo de RiskMathics.</div>
+    </div>
+    <div class="action-card remove">
+      <div class="action-card-tag">✕ Deprioritizar</div>
+      <div class="action-card-title">Webinars sin Interactividad</div>
+      <div class="action-card-desc">Migrar a formato case-study con datos reales. Mayor engagement y conversion rate.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SECTION X: CALENDAR ========== -->
+
+<section class="section">
+  <div class="section-header">
+    <span class="section-number">10</span>
+    <h2 class="section-title">Calendario Estratégico — Próxima Semana</h2>
+  </div>
+
+  <div class="chart-grid">
+    <div class="chart-card">
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-date">LUN 16 FEB</div>
+          <div class="timeline-event">Presidents' Day EE.UU. · Año Nuevo Chino</div>
+          <div class="timeline-desc">Mercados EE.UU. y Asia cerrados. Liquidez reducida. PIB Q4 Japón.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">MAR 17 FEB</div>
+          <div class="timeline-event">Negociaciones Paz Ginebra — Día 1</div>
+          <div class="timeline-desc">CPI enero Alemania. Inicio de negociaciones trilaterales Ucrania-Rusia-EE.UU.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">MIÉ 18 FEB</div>
+          <div class="timeline-event">MINUTAS FOMC ★ Evento Clave</div>
+          <div class="timeline-desc">Dirección de tasas → pricing de derivados. CPI UK. Durable Goods Orders. Ginebra día 2.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">JUE 19 FEB</div>
+          <div class="timeline-event">Philly Fed · Jobless Claims</div>
+          <div class="timeline-desc">Manufacturing Index febrero. Inventarios de petróleo. Datos de actividad económica.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">VIE 20 FEB</div>
+          <div class="timeline-event">Cierre de Semana · Evaluación Narrativa</div>
+          <div class="timeline-desc">Evaluación post-Múnich y post-Ginebra. Próximo reporte semanal RiskMathics.</div>
+        </div>
+      </div>
+    </div>
+
+```
+<div class="chart-card">
+  <div class="chart-card-header">
+    <div>
+      <div class="chart-card-title">Horizonte Estratégico 2026</div>
+      <div class="chart-card-subtitle">Eventos con impacto para RiskMathics</div>
+    </div>
+  </div>
+  <div class="chart-wrapper"><canvas id="horizonChart"></canvas></div>
+  <div class="explanation-panel">
+    <div class="exp-title">¿Qué muestra esta gráfica?</div>
+    Mapa temporal de eventos estratégicos con impacto potencial (eje Y = severidad/oportunidad, eje X = timing). <em>USMCA Review (julio) y FIFA World Cup (verano) son los eventos de mayor magnitud</em>. Basel Endgame y UST Clearing Deadline al cierre de año representan oportunidades de certificación masiva para RiskMathics.
+  </div>
+</div>
+```
+
+  </div>
+</section>
+
+<!-- ========== SECTION XI: POSITIONING ========== -->
+
+<section class="section">
+  <div class="section-header">
+    <span class="section-number">11</span>
+    <h2 class="section-title">Conclusión y Posicionamiento</h2>
+  </div>
+
+  <div class="callout-box">
+    <div class="callout-title">Posicionamiento Recomendado</div>
+    <ul class="callout-list">
+      <li><strong>Mantener exposición a renta variable mexicana</strong> — momentum + valuación relativa. IPC en máximos con reservas récord como respaldo.</li>
+      <li><strong>Cobertura selectiva en USD/MXN</strong> — para escenarios de estrés bilateral. USMCA review en julio como trigger. Rango esperado: 17.16-18.00.</li>
+      <li><strong>Largo oro como hedge geopolítico</strong> — ~$5,000/oz con Goldman target $4,900. Múnich confirma que la fragmentación geopolítica es estructural.</li>
+      <li><strong>Cautela en tech de EE.UU.</strong> — hasta que se resuelva la narrativa de IA y la rotación sectorial se estabilice. Nasdaq -3% YTD, 5 semanas consecutivas de caída.</li>
+      <li><strong>Bitcoin: NO agregar</strong> — hasta que Fear & Greed salga de "Extreme Fear" (actualmente 9). Riesgo de capitulación adicional.</li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<!-- ========== FOOTER ========== -->
+
+<footer class="report-footer">
+  <div class="footer-line"></div>
+  <div class="footer-text">RiskMathics Financial Institute · Inteligencia Estratégica Global · Semana 9-13 Feb 2026</div>
+  <div class="footer-text" style="margin-top: 8px; opacity: 0.5;">Fuentes: BLS, Fed, Banxico, ISDA, Reuters, CNBC, WSJ, Goldman Sachs, Vanguard, FIFA-WTO · Próximo reporte: 20 Feb 2026</div>
+</footer>
+
+<script>
+// === CHART.JS GLOBAL CONFIG ===
+Chart.defaults.color = '#8b97a8';
+Chart.defaults.borderColor = '#1e2a3f';
+Chart.defaults.font.family = "'Source Sans 3', sans-serif";
+Chart.defaults.font.size = 12;
+Chart.defaults.plugins.legend.labels.usePointStyle = true;
+Chart.defaults.plugins.legend.labels.pointStyle = 'circle';
+Chart.defaults.plugins.legend.labels.padding = 16;
+
+const goldColor = '#d4a853';
+const goldDim = 'rgba(212,168,83,0.2)';
+const greenColor = '#34d399';
+const greenDim = 'rgba(52,211,153,0.2)';
+const redColor = '#f87171';
+const redDim = 'rgba(248,113,113,0.2)';
+const blueColor = '#60a5fa';
+const blueDim = 'rgba(96,165,250,0.2)';
+const amberColor = '#fbbf24';
+const amberDim = 'rgba(251,191,36,0.2)';
+const purpleColor = '#a78bfa';
+const grayColor = '#5a6577';
+const grayDim = 'rgba(90,101,119,0.15)';
+
+// === 1. IRI CHART ===
+new Chart(document.getElementById('iriChart'), {
+  type: 'line',
+  data: {
+    labels: ['Sem -7', 'Sem -6', 'Sem -5', 'Sem -4', 'Sem -3', 'Sem -2', 'Sem -1', 'Actual'],
+    datasets: [{
+      label: 'IRI Total',
+      data: [14.8, 15.1, 15.4, 15.6, 15.9, 16.0, 16.3, 16.5],
+      borderColor: goldColor,
+      backgroundColor: goldDim,
+      fill: true,
+      tension: 0.4,
+      borderWidth: 2.5,
+      pointRadius: 4,
+      pointBackgroundColor: goldColor,
+    }, {
+      label: 'Entorno General (IG)',
+      data: [12.5, 12.8, 13.0, 13.3, 13.6, 13.9, 14.2, 14.4],
+      borderColor: blueColor,
+      backgroundColor: blueDim,
+      fill: true,
+      tension: 0.4,
+      borderWidth: 2,
+      pointRadius: 3,
+      pointBackgroundColor: blueColor,
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: 'top' },
+    },
+    scales: {
+      y: { min: 10, max: 25, grid: { color: 'rgba(30,42,63,0.5)' },
+        ticks: { callback: v => v + '/25' }
+      },
+      x: { grid: { display: false } }
+    }
+  }
+});
+
+// === 2. RISK RADAR ===
+new Chart(document.getElementById('riskRadar'), {
+  type: 'radar',
+  data: {
+    labels: ['Fricción Bilateral\nEE.UU.-México', 'Reconfiguración\nHemisférica', 'Entorno Global\nsin Amortiguadores', 'Riesgo Político\nEE.UU.', 'Estabilidad\nFinanciera MX'],
+    datasets: [{
+      label: 'Semana Actual',
+      data: [19, 17, 16, 16, 12],
+      borderColor: goldColor,
+      backgroundColor: 'rgba(212,168,83,0.15)',
+      borderWidth: 2.5,
+      pointRadius: 5,
+      pointBackgroundColor: goldColor,
+    }, {
+      label: 'Semana Previa',
+      data: [18, 16, 15, 15, 12],
+      borderColor: grayColor,
+      backgroundColor: grayDim,
+      borderWidth: 1.5,
+      pointRadius: 3,
+      pointBackgroundColor: grayColor,
+      borderDash: [5,5],
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { position: 'top' } },
+    scales: {
+      r: {
+        min: 0, max: 25,
+        grid: { color: 'rgba(30,42,63,0.5)' },
+        angleLines: { color: 'rgba(30,42,63,0.4)' },
+        pointLabels: { font: { size: 10 }, color: '#8b97a8' },
+        ticks: { stepSize: 5, display: false }
+      }
+    }
+  }
+});
+
+// === 3. RISK BARS ===
+new Chart(document.getElementById('riskBars'), {
+  type: 'bar',
+  data: {
+    labels: ['Fricción Bilateral', 'Agenda Hemisférica', 'Política EE.UU.', 'Entorno Global', 'Tipo de Cambio', 'Estabilidad MX'],
+    datasets: [{
+      label: 'Nivel de Riesgo',
+      data: [19, 17, 16, 16, 14, 12],
+      backgroundColor: [redColor, amberColor, amberColor, amberColor, blueColor, greenColor],
+      borderRadius: 6,
+      barThickness: 28,
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { min: 0, max: 25, grid: { color: 'rgba(30,42,63,0.3)' },
+        ticks: { callback: v => v + '/25' }
+      },
+      y: { grid: { display: false } }
+    }
+  }
+});
+
+// === 4. EQUITY BARS ===
+new Chart(document.getElementById('equityBars'), {
+  type: 'bar',
+  data: {
+    labels: ['Nikkei 225\n(Japón)', 'MSCI EAFE\n(Internacional)', 'IPC México\n(BMV)', 'Dow Jones', 'S&P 500', 'Nasdaq\nComposite', 'VIX\n(Volatilidad)'],
+    datasets: [{
+      label: 'Cambio Semanal %',
+      data: [5.0, 1.9, 0.9, -1.2, -1.3, -2.1, 15.7],
+      backgroundColor: [greenColor, greenColor, greenColor, redColor, redColor, redColor, amberColor],
+      borderRadius: 6,
+      barThickness: 40,
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => ctx.parsed.y.toFixed(1) + '%' } }
+    },
+    scales: {
+      y: { grid: { color: 'rgba(30,42,63,0.3)' }, ticks: { callback: v => v + '%' } },
+      x: { grid: { display: false }, ticks: { font: { size: 11 } } }
+    }
+  }
+});
+
+// === 5. YTD LINES ===
+new Chart(document.getElementById('ytdLines'), {
+  type: 'line',
+  data: {
+    labels: ['Ene 6', 'Ene 13', 'Ene 20', 'Ene 27', 'Feb 3', 'Feb 10', 'Feb 13'],
+    datasets: [{
+      label: 'Nikkei 225',
+      data: [2.0, 4.5, 6.0, 7.5, 9.0, 10.5, 12.0],
+      borderColor: purpleColor, backgroundColor: 'transparent', tension: 0.4, borderWidth: 2.5, pointRadius: 2,
+    }, {
+      label: 'MSCI EAFE',
+      data: [1.5, 3.0, 4.2, 5.0, 6.0, 7.0, 7.8],
+      borderColor: blueColor, backgroundColor: 'transparent', tension: 0.4, borderWidth: 2.5, pointRadius: 2,
+    }, {
+      label: 'IPC México',
+      data: [1.0, 2.0, 3.0, 3.5, 4.0, 4.5, 5.0],
+      borderColor: greenColor, backgroundColor: 'transparent', tension: 0.4, borderWidth: 2.5, pointRadius: 2,
+    }, {
+      label: 'Dow Jones',
+      data: [1.0, 2.0, 2.5, 3.0, 3.5, 3.8, 3.1],
+      borderColor: goldColor, backgroundColor: 'transparent', tension: 0.4, borderWidth: 2, pointRadius: 2, borderDash: [4,4],
+    }, {
+      label: 'S&P 500',
+      data: [0.5, 1.0, 1.5, 1.5, 1.0, 0.5, 0.0],
+      borderColor: grayColor, backgroundColor: 'transparent', tension: 0.4, borderWidth: 2, pointRadius: 2,
+    }, {
+      label: 'Nasdaq',
+      data: [-0.5, -1.0, -1.5, -2.0, -2.5, -2.8, -3.0],
+      borderColor: redColor, backgroundColor: 'transparent', tension: 0.4, borderWidth: 2.5, pointRadius: 2,
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { position: 'top', labels: { font: { size: 10 } } } },
+    scales: {
+      y: { grid: { color: 'rgba(30,42,63,0.3)' }, ticks: { callback: v => v + '%' } },
+      x: { grid: { display: false } }
+    }
+  }
+});
+
+// === 6. VIX CHART ===
+new Chart(document.getElementById('vixChart'), {
+  type: 'line',
+  data: {
+    labels: ['Sem -7', 'Sem -6', 'Sem -5', 'Sem -4', 'Sem -3', 'Sem -2', 'Sem -1', 'Actual'],
+    datasets: [{
+      label: 'VIX',
+      data: [15.1, 14.8, 15.5, 16.2, 17.0, 17.8, 17.8, 20.6],
+      borderColor: redColor,
+      backgroundColor: redDim,
+      fill: true,
+      tension: 0.4,
+      borderWidth: 2.5,
+      pointRadius: 4,
+      pointBackgroundColor: redColor,
+    }, {
+      label: 'Zona Complacencia (<16)',
+      data: [16, 16, 16, 16, 16, 16, 16, 16],
+      borderColor: grayColor,
+      borderDash: [6, 4],
+      borderWidth: 1,
+      pointRadius: 0,
+      fill: false,
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { position: 'top' } },
+    scales: {
+      y: { min: 12, max: 25, grid: { color: 'rgba(30,42,63,0.3)' } },
+      x: { grid: { display: false } }
+    }
+  }
+});
+
+// === 7. RATES CHART ===
+new Chart(document.getElementById('ratesChart'), {
+  type: 'line',
+  data: {
+    labels: ['Mar 25', 'Jun 25', 'Sep 25', 'Dic 25', 'Feb 26', 'Jun 26(p)', 'Dic 26(p)'],
+    datasets: [{
+      label: 'Banxico',
+      data: [11.00, 10.25, 9.50, 8.25, 7.00, 6.75, 6.50],
+      borderColor: greenColor,
+      backgroundColor: greenDim,
+      fill: true,
+      tension: 0.3,
+      borderWidth: 2.5,
+      pointRadius: 4,
+    }, {
+      label: 'Fed Funds',
+      data: [5.25, 5.00, 4.75, 4.25, 3.625, 3.375, 3.125],
+      borderColor: blueColor,
+      backgroundColor: blueDim,
+      fill: true,
+      tension: 0.3,
+      borderWidth: 2.5,
+      pointRadius: 4,
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { position: 'top' } },
+    scales: {
+      y: { min: 2, max: 12, grid: { color: 'rgba(30,42,63,0.3)' }, ticks: { callback: v => v + '%' } },
+      x: { grid: { display: false }, ticks: { font: { size: 10 } } }
+    }
+  }
+});
+
+// === 8. CPI CHART ===
+new Chart(document.getElementById('cpiChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Jul 25', 'Ago 25', 'Sep 25', 'Oct 25', 'Nov 25', 'Dic 25', 'Ene 26'],
+    datasets: [{
+      label: 'CPI EE.UU. (%)',
+      data: [3.2, 3.0, 2.9, 2.8, 2.7, 2.7, 2.4],
+      backgroundColor: function(ctx) {
+        return ctx.parsed.y <= 2.5 ? greenColor : (ctx.parsed.y <= 3.0 ? amberColor : redColor);
+      },
+      borderRadius: 4,
+      barThickness: 24,
+    }, {
+      label: 'Target Fed (2%)',
+      data: [2, 2, 2, 2, 2, 2, 2],
+      type: 'line',
+      borderColor: grayColor,
+      borderDash: [6,4],
+      borderWidth: 1.5,
+      pointRadius: 0,
+      fill: false,
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { position: 'top' } },
+    scales: {
+      y: { min: 0, max: 4, grid: { color: 'rgba(30,42,63,0.3)' }, ticks: { callback: v => v + '%' } },
+      x: { grid: { display: false } }
+    }
+  }
+});
+
+// === 9. USD/MXN CHART ===
+new Chart(document.getElementById('usdmxnChart'), {
+  type: 'line',
+  data: {
+    labels: ['Feb 25', 'Abr 25', 'Jun 25', 'Ago 25', 'Oct 25', 'Dic 25', 'Feb 26'],
+    datasets: [{
+      label: 'USD/MXN',
+      data: [20.30, 19.80, 19.20, 18.60, 18.10, 17.60, 17.13],
+      borderColor: greenColor,
+      backgroundColor: greenDim,
+      fill: true,
+      tension: 0.4,
+      borderWidth: 2.5,
+      pointRadius: 4,
+      pointBackgroundColor: greenColor,
+    }, {
+      label: 'Pronóstico Fin 2026',
+      data: [null, null, null, null, null, null, 16.70],
+      borderColor: goldColor,
+      pointRadius: 8,
+      pointBackgroundColor: goldColor,
+      pointStyle: 'star',
+      showLine: false,
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { position: 'top' } },
+    scales: {
+      y: { reverse: true, min: 16, max: 21, grid: { color: 'rgba(30,42,63,0.3)' },
+        ticks: { callback: v => '$' + v.toFixed(2) }
+      },
+      x: { grid: { display: false } }
+    }
+  }
+});
+
+// === 10. COMMODITIES CHART ===
+new Chart(document.getElementById('commodChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Oro', 'Plata', 'Petróleo WTI', 'Petróleo Brent'],
+    datasets: [{
+      label: 'Precio Actual',
+      data: [5000, 79.92, 63.5, 65],
+      backgroundColor: [goldColor, '#c0c0c0', '#8b5e3c', '#6b4226'],
+      borderRadius: 6,
+      barThickness: 40,
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => {
+        const labels = ['$5,000/oz', '$79.92/oz', '$63.50/bbl', '$65.00/bbl'];
+        return labels[ctx.dataIndex];
+      }}}
+    },
+    scales: {
+      y: { display: false },
+      x: { grid: { display: false } }
+    }
+  }
+});
+
+// === 11. FEAR & GREED (Doughnut) ===
+new Chart(document.getElementById('fearGreed'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Fear Level', 'Remaining'],
+    datasets: [{
+      data: [91, 9],
+      backgroundColor: [redColor, 'rgba(30,42,63,0.4)'],
+      borderWidth: 0,
+      cutout: '75%',
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: { enabled: false },
+    },
+  },
+  plugins: [{
+    id: 'centerText',
+    afterDraw(chart) {
+      const {ctx, width, height} = chart;
+      ctx.save();
+      ctx.textAlign = 'center';
+      ctx.fillStyle = redColor;
+      ctx.font = "800 42px 'Playfair Display', serif";
+      ctx.fillText('9', width/2, height/2 + 8);
+      ctx.fillStyle = '#8b97a8';
+      ctx.font = "500 11px 'JetBrains Mono', monospace";
+      ctx.fillText('EXTREME FEAR', width/2, height/2 + 28);
+      ctx.restore();
+    }
+  }]
+});
+
+// === 12. GDP PROJECTIONS ===
+new Chart(document.getElementById('gdpChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Vanguard', 'Goldman Sachs', 'Banxico (central)', 'Banxico (pesimista)'],
+    datasets: [{
+      label: 'PIB México 2026 (%)',
+      data: [1.5, 1.3, 1.1, 0.4],
+      backgroundColor: [greenColor, blueColor, amberColor, redColor],
+      borderRadius: 6,
+      barThickness: 36,
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => ctx.parsed.y + '%' } }
+    },
+    scales: {
+      y: { min: 0, max: 2.0, grid: { color: 'rgba(30,42,63,0.3)' }, ticks: { callback: v => v + '%' } },
+      x: { grid: { display: false } }
+    }
+  }
+});
+
+// === 13. MEXICO RADAR ===
+new Chart(document.getElementById('mexicoRadar'), {
+  type: 'radar',
+  data: {
+    labels: ['Reservas\nInternacionales', 'Tipo de\nCambio', 'Inflación\nControlada', 'Estabilidad\nFinanciera', 'Crecimiento\nPIB', 'Riesgo\nExterno'],
+    datasets: [{
+      label: 'México Actual',
+      data: [10, 9, 8, 9, 4, 3],
+      borderColor: greenColor,
+      backgroundColor: 'rgba(52,211,153,0.12)',
+      borderWidth: 2.5,
+      pointRadius: 5,
+      pointBackgroundColor: greenColor,
+    }, {
+      label: 'Target Óptimo',
+      data: [10, 8, 8, 9, 7, 8],
+      borderColor: grayColor,
+      backgroundColor: grayDim,
+      borderWidth: 1.5,
+      pointRadius: 3,
+      borderDash: [5,5],
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { position: 'top' } },
+    scales: {
+      r: {
+        min: 0, max: 10,
+        grid: { color: 'rgba(30,42,63,0.4)' },
+        angleLines: { color: 'rgba(30,42,63,0.3)' },
+        pointLabels: { font: { size: 10 }, color: '#8b97a8' },
+        ticks: { stepSize: 2, display: false }
+      }
+    }
+  }
+});
+
+// === 14. HORIZON / STRATEGIC EVENTS ===
+new Chart(document.getElementById('horizonChart'), {
+  type: 'bubble',
+  data: {
+    datasets: [{
+      label: 'Eventos Estratégicos',
+      data: [
+        { x: 1, y: 7, r: 10 },  // Minutas FOMC
+        { x: 1.5, y: 8, r: 12 },  // Ginebra
+        { x: 3, y: 9, r: 14 },  // Cumbre Trump-Latam
+        { x: 4, y: 8, r: 11 },  // Basel Endgame
+        { x: 6, y: 10, r: 18 }, // USMCA Review
+        { x: 7, y: 9, r: 16 },  // FIFA World Cup
+        { x: 11, y: 8, r: 13 }, // UST Clearing Deadline
+      ],
+      backgroundColor: [
+        'rgba(96,165,250,0.6)',
+        'rgba(167,139,250,0.6)',
+        'rgba(248,113,113,0.6)',
+        'rgba(251,191,36,0.6)',
+        'rgba(248,113,113,0.7)',
+        'rgba(52,211,153,0.6)',
+        'rgba(212,168,83,0.6)',
+      ],
+      borderColor: [blueColor, purpleColor, redColor, amberColor, redColor, greenColor, goldColor],
+      borderWidth: 2,
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          label: function(ctx) {
+            const labels = ['Minutas FOMC (Feb 18)', 'Ginebra (Feb 17-18)', 'Cumbre Trump-Latam (Mar)', 'Basel Endgame Q1', 'USMCA Review (Jul)', 'FIFA World Cup (Verano)', 'UST Clearing Deadline (Dic)'];
+            return labels[ctx.dataIndex];
+          }
+        }
+      }
+    },
+    scales: {
+      x: {
+        min: 0, max: 12,
+        grid: { color: 'rgba(30,42,63,0.3)' },
+        ticks: {
+          callback: function(v) {
+            const months = ['', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+            return months[v] || '';
+          }
+        },
+        title: { display: true, text: 'Timeline 2026', color: '#5a6577', font: { size: 11 } }
+      },
+      y: {
+        min: 5, max: 11,
+        grid: { color: 'rgba(30,42,63,0.3)' },
+        title: { display: true, text: 'Impacto Potencial', color: '#5a6577', font: { size: 11 } },
+        ticks: { display: false }
+      }
+    }
+  }
+});
+
+// === SCROLL ANIMATIONS ===
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.animation = 'fadeInUp 0.6s ease-out forwards';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.section, .chart-card, .kpi-card, .risk-row, .action-card, .geo-card').forEach(el => {
+  el.style.opacity = '0';
+  observer.observe(el);
+});
+</script>
+
+</body>
+</html>
